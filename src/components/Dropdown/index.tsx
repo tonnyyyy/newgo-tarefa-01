@@ -20,6 +20,7 @@ const Dropdown: React.FC<IDropdownProps> = ({ items, title }) => {
       <MenuList
         bgColor='var(--font)'
         boxShadow='lg'
+        borderWidth='0'
       >
         {items.map((item) => (
           <MenuItem bgColor='inherit' py={0} h='2.5rem'>{item}</MenuItem>
