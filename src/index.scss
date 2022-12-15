@@ -1,0 +1,28 @@
+:root {
+  // DARKMODE
+  --bg-dark: rgb(21,21,21);
+  --font-dark: rgb(230,230,230);
+  --primary-dark: rgb(10,10,10);
+
+  // LIGHTMODE
+  --font: rgb(15,15,15);
+
+
+  --bg-gradient: linear-gradient(0deg, rgb(3,3,3) 0%, var(--bg-dark) 100%);
+}
+
+html {
+  background: rgb(5,5,5);
+} 
+
+body > * {
+  margin: 0;
+  padding: 0;
+  background-image: var(--bg-gradient);
+}
+
+button:disabled {
+  &:hover {
+    cursor: not-allowed;
+  }
+}
