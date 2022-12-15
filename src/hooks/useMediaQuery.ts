@@ -5,7 +5,7 @@ type Query = 'mobile' | 'desktop' | 'tv';
 export const useMediaQuery = (query: Query) => {
 
   const queries  = {
-    mobile: '1024px',
+    mobile: '720px',
     desktop: '1920px',
     tv: '2500px'
   }
