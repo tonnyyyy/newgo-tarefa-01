@@ -16,6 +16,14 @@ const Nav: React.FC = () => {
           <Navlink to='/cadastro/colaborador' label='colaborador' />
         ]}
       />
+      <Dropdown
+        title='cálculos'
+        items={[
+          <Navlink to='/calculo/folha-pagamento' label='folha de pagamento' />,
+          <Navlink to='/calculo/ferias' label='férias' />,
+          <Navlink to='/calculo/decimo' label='13º salário' />,
+        ]}
+      />
     </HStack>
   );
 }
