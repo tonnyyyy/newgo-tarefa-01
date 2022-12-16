@@ -1,4 +1,4 @@
-import { Box, VStack } from '@chakra-ui/react';
+import { Box, VStack, InputProps } from '@chakra-ui/react';
 import { ComponentType, ReactElement } from 'react';
 import { useForm, Path, UseFormReturn } from 'react-hook-form';
 import Button from '../../Button';
@@ -6,17 +6,19 @@ import Input from '../../Input';
 
 interface Nothing {}
 
-type Field<T> = {
-  type: 'text' | 'password' | 'cep';
+interface Field<T> extends InputProps {
+  variant: 'input';
   label: string;
   name: Path<T>;
+  mask?: 'cep' | 'cel';
+  rightIcon?: React.ReactNode;
 }
 
 interface IFormTemplateProps<T extends Nothing> {
   onSubmit?: (data: T) => void;
   fields: Field<T>[];
   hasSubmitButton?: boolean;
-  customUseForm?: UseFormReturn<T, any>
+  customForm?: UseFormReturn<T, any>
 }
 
 // O '...extends Nothing' é somente para o typescript entender que
@@ -28,12 +30,18 @@ interface IFormTemplateProps<T extends Nothing> {
  * @example
  * <FormTemplate fields={[{ type: 'text', name: 'nomeDoCampo', label: 'Nome exibido' }]} />
  */
-const FormTemplate = <T extends Nothing>({ fields, onSubmit, hasSubmitButton, customUseForm: customForm }: IFormTemplateProps<T>) => {
+const FormTemplate = <T extends Nothing>({ fields, onSubmit, hasSubmitButton, customForm }: IFormTemplateProps<T>) => {
   const { register, handleSubmit } = customForm ? customForm : useForm<T>();
   const renderInput = {
-    text: (field: Field<T>) => <Input label={field.label} {...register(field.name)} />,
-    password: (field: Field<T>) => <Input type='password' label={field.label} {...register(field.name)} />,
-    cep: (field: Field<T>) => <Input mask='cep' placeholder='99999-999' label={field.label} {...register(field.name)} />
+    input: ({ variant, ...field }: Field<T>) => (
+      <Input
+        {...field}
+        {...register(field.name)}
+        label={field.label}
+        mask={field.mask}
+        rightIcon={field.rightIcon}
+      />
+    ),
   };
 
   return (
@@ -46,7 +54,7 @@ const FormTemplate = <T extends Nothing>({ fields, onSubmit, hasSubmitButton, cu
       flexGrow={1}
     >
       <VStack spacing={5}>
-        {fields.map((field) => renderInput[field.type](field))}
+        {fields.map((field) => renderInput[field.variant](field))}
       </VStack>
       {hasSubmitButton && <Button text='Pronto' type='submit' w='75%' alignSelf='center' />}
     </Box>
