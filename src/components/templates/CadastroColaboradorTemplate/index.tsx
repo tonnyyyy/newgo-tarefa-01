@@ -123,10 +123,10 @@ const CadastroColaboradorTemplate: React.FC = () => {
                   <FormTemplate<IFormData>
                     customForm={formInstance}
                     fields={[
-                      { variant: "input", name: "endereco.cep", label: "CEP", mask: 'cep', rightIcon: isLoadingCep ? <Spinner /> : null },
-                      { variant: "input", name: "endereco.logradouro", label: "Logradouro" },
-                      { variant: "input", name: "endereco.cidade", label: "Cidade" },
-                      { variant: "input", name: "endereco.estado", label: "Estado" },
+                      { variant: "input", name: "endereco.cep", label: "CEP", mask: 'cep', rightIcon: isLoadingCep ? <Spinner /> : null, placeholder: '99999-999' },
+                      { variant: "input", name: "endereco.logradouro", label: "Logradouro", placeholder: 'Rua, Av., Estrada...' },
+                      { variant: "input", name: "endereco.cidade", label: "Cidade", placeholder: 'Insira a cidade' },
+                      { variant: "input", name: "endereco.estado", label: "Estado", placeholder: 'Insira o estado' },
                     ]}
                   />
                   <div style={{ display: 'flex', alignSelf: isMobile ? 'start' : 'end'}}>
@@ -134,7 +134,7 @@ const CadastroColaboradorTemplate: React.FC = () => {
                       customForm={formInstance}
                       fields={[
                         { variant: "input", name: "endereco.numero", label: "Número", type: 'number' },
-                        { variant: "input", name: "endereco.bairro", label: "Bairro" },
+                        { variant: "input", name: "endereco.bairro", label: "Bairro", placeholder: 'Insira o bairro' },
                         { variant: "input", name: "endereco.pais", label: "País" },
                       ]}
                     />
