@@ -1,25 +1,37 @@
-import { Image } from "@chakra-ui/react";
-import { useEffect } from "react";
+import { Box, Flex, Image } from "@chakra-ui/react";
 import Container from "../../components/Container";
-import Title from "../../components/Title";
-import { useHeader } from "../../hooks/useHeader";
+import Logo from "../../assets/logo-horizontal-sem-foguete.svg";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
 
 const Home: React.FC = () => {
-  const { headerHeight } = useHeader();
-  useEffect(() => console.log(headerHeight), [headerHeight]);
+  const isMobile = useMediaQuery('mobile');
 
   return (
-    <Container>
-      <Image
-        src='images/logo-light.png'
-        py={10}
-        transition='padding 1s, box-shadow .5s'
+    <Container overflowX='hidden'>
+      <Flex
+        align='center'
+        gap={5}
+        ml='-9rem'
+        mt='2rem'
+        pl={5}
+        transition='margin 1s, box-shadow .5s'
         _hover={{
-          transition: 'padding .5s, box-shadow 1s',
+          transition: 'margin .5s, box-shadow 1s',
           boxShadow: 'inset 6px 0 var(--font-dark)',
-          paddingLeft: 10
-        }}  
-      />
+          marginLeft: '-1rem',
+          paddingLeft: 5
+        }}
+      >
+        <Image
+          onDoubleClick={() => console.log('🤖 gif feito pelo incrível Ademar 🤖')}
+          h='6rem'
+          src='images/logo-animated.gif'
+        />
+        <Image
+          h={isMobile ? '6rem' : 'unset'}
+          src={Logo}
+        />
+      </Flex>  
     </Container>
   );
 }
