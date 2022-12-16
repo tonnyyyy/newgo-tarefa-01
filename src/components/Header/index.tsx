@@ -14,8 +14,7 @@ const Header: ForwardRefRenderFunction<HTMLDivElement> = (_, ref) => {
       top={0}
       h='75px;'
       w='100%' 
-      bgColor='black'
-      boxShadow='lg'
+      bgColor='var(--bg-dark)'
       ref={ref}
       zIndex={1}
     >
