@@ -1,18 +1,18 @@
 :root {
   // DARKMODE
-  --bg-dark: rgb(21,21,21);
+  --bg-dark: #3c4858;
   --font-dark: rgb(230,230,230);
-  --primary-dark: rgb(10,10,10);
+  --primary-dark: #1d262e;
 
   // LIGHTMODE
   --font: rgb(15,15,15);
 
 
-  --bg-gradient: linear-gradient(0deg, rgb(3,3,3) 0%, var(--bg-dark) 100%);
+  --bg-gradient: linear-gradient(0deg, #31ad3d 0%, var(--bg-dark) 40%);
 }
 
 html {
-  background: rgb(5,5,5);
+  background: var(--bg-dark);
 } 
 
 body > * {
