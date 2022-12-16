@@ -9,9 +9,9 @@ const Contatos: React.FC = () => {
       telefone='+55 11 4752-2376'
       whatsapp='+55 11 96314-4712'
       redesSociais={[
-        { link: 'https://facebook.com', icon: <AiOutlineFacebook size={32} />},
-        { link: 'https://instagram.com', icon: <AiOutlineInstagram size={32} />},
-        { link: 'https://linkedin.com', icon: <AiFillLinkedin size={32} />}
+        { link: 'https://facebook.com', icon: <AiOutlineFacebook size={30} />},
+        { link: 'https://instagram.com', icon: <AiOutlineInstagram size={30} />},
+        { link: 'https://linkedin.com', icon: <AiFillLinkedin size={30} />}
       ]}
     />
   );

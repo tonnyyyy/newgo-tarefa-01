@@ -1,9 +1,11 @@
-import { Heading, HStack, Stack, VStack } from "@chakra-ui/react";
+import { Heading, HStack, Stack, Text, VStack } from "@chakra-ui/react";
 import Card from "../../Card";
 
 import { useMediaQuery } from "../../../hooks/useMediaQuery";
 import Container from "../../Container";
 import Title from "../../Title";
+import { BsFillTelephoneForwardFill, BsWhatsapp } from "react-icons/bs";
+import { AiFillMail } from "react-icons/ai";
 
 interface IContatoTemplateProps {
   telefone: string;
@@ -25,13 +27,13 @@ const ContatosTemplate: React.FC<IContatoTemplateProps> = ({ email, telefone, wh
         justify='center'
         flexWrap='wrap'
       >
-        <Card title="☎️ Telefone" content={telefone} />
-        <Card title="📞 Whatsapp" content={whatsapp} />
-        <Card title="✉️ Email" content={email} />
+        <Card title={<HStack justify='center'><BsFillTelephoneForwardFill /><Text>Telefone</Text></HStack>} content={telefone} />
+        <Card title={<HStack justify='center'><BsWhatsapp /><Text>Whatsapp</Text></HStack>} content={whatsapp} />
+        <Card title={<HStack justify='center'><AiFillMail /><Text>E-mail</Text></HStack>} content={email} />
         <Card
-          title="🙋‍♂️ Redes sociais"
+          title="Redes sociais"
           content={(
-            <HStack spacing={5}>
+            <HStack spacing={5} justify="center">
               {redesSociais.map(({ icon, link }) =>(
                 <a href={link} target="_blank">{icon}</a>
               ))}
