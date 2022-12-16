@@ -16,7 +16,7 @@ const Dropdown: React.FC<IDropdownProps> = ({ items, title }) => {
             rightIcon={isOpen ? <BiChevronUp /> : <BiChevronDown />}
             variant='unstyled'
             color='var(--font-dark)'
-            fontSize='18px'
+            fontSize='1.15rem'
             >
               {title}
             </MenuButton>

@@ -18,7 +18,7 @@ const Navlink: React.FC<INavlinkProps> = ({ label, to }) => {
           boxShadow: 'inset 0 -5px var(--font-dark)'
         }}
       >
-          <Text color='var(--font-dark)' fontWeight='semibold'>{label}</Text>
+          <Text color='var(--font-dark)' fontWeight='semibold' fontSize='1.15rem'>{label}</Text>
       </Flex>
     </Link>
   );
