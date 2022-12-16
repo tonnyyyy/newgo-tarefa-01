@@ -11,7 +11,7 @@ const HasHeader: React.FC<PropsWithChildren> = ({ children }) => {
   return (
     <>
       <Header ref={headerRef} />
-      <Box mt={headerHeight} pt={5} minH={`calc(100vh - ${headerHeight}px)`}>
+      <Box mt={headerHeight} py={5} minH={`calc(100vh - ${headerHeight}px)`}>
         {children}
       </Box>
     </>
