@@ -1,4 +1,4 @@
-import { Flex, useToast } from "@chakra-ui/react";
+import { Flex, Spinner, useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
@@ -10,7 +10,7 @@ import Title from "../../Title";
 import FormTemplate from "../FormTemplate";
 import Stepper from "../../Stepper";
 import { useMediaQuery } from "../../../hooks/useMediaQuery";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface IFormData {
   nomeColab: string;
@@ -31,24 +31,33 @@ interface IFormData {
 }
 
 const CadastroColaboradorTemplate: React.FC = () => {
+  const [isLoadingCep, setIsLoadingCep] = useState<boolean>(false);
   const toast = useToast({ duration: 3000, isClosable: true });
   const navigate = useNavigate();
   const isMobile = useMediaQuery("mobile");
-  const formInstance = useForm<IFormData>();
+  const formInstance = useForm<IFormData>({
+    defaultValues: {
+      endereco: {
+        pais: 'Brasil'
+      }
+    }
+  });
   const { handleSubmit, watch, setValue } = formInstance;
 
   const cep = watch('endereco.cep');
-  console.log(cep);
 
   useEffect(() => {
     const cepQuery = cep?.split('-').join('')
     if (cepQuery?.length === 8) {
-      viacep.get(cep).then((res) => {
-        setValue('endereco.logradouro', res.data.logradouro);
-        setValue('endereco.bairro', res.data.bairro);
-        setValue('endereco.cidade', res.data.localidade);
-        setValue('endereco.estado', res.data.uf);
-      });
+      setIsLoadingCep(true);
+      viacep.get(cep)
+        .then((res) => {
+          setValue('endereco.logradouro', res.data.logradouro);
+          setValue('endereco.bairro', res.data.bairro);
+          setValue('endereco.cidade', res.data.localidade);
+          setValue('endereco.estado', res.data.uf);
+        })
+        .finally(() => setIsLoadingCep(false));
     }
   }, [cep])
 
@@ -84,19 +93,19 @@ const CadastroColaboradorTemplate: React.FC = () => {
                 direction={isMobile ? "column" : "row"}
               >
                 <FormTemplate<IFormData>
-                  customUseForm={formInstance}
+                  customForm={formInstance}
                   fields={[
-                    { type: "text", name: "nomeColab", label: "Nome" },
-                    { type: "text", name: "cargo", label: "Cargo na empresa" },
-                    { type: "text", name: "setor", label: "Setor de atuação" },
+                    { variant: "input", name: "nomeColab", label: "Nome", placeholder: "João" },
+                    { variant: "input", name: "cargo", label: "Cargo na empresa", placeholder: "CTO"},
+                    { variant: "input", name: "setor", label: "Setor de atuação", placeholder: "Tecnologia"},
                   ]}
                 />
                 <FormTemplate<IFormData>
-                  customUseForm={formInstance}
+                  customForm={formInstance}
                   fields={[
-                    { type: "text", name: "dataAdmissao", label: "Data de adimissão" },
-                    { type: "text", name: "telefone", label: "Telefone" },
-                    { type: "text", name: "email", label: "email" },
+                    { variant: "input", name: "dataAdmissao", label: "Data de adimissão", type: 'date' },
+                    { variant: "input", name: "telefone", label: "Telefone", type: 'tel', mask: 'cel', placeholder: '(99)99999-9999' },
+                    { variant: "input", name: "email", label: "email", type: 'email', placeholder: 'joao@mail.com' },
                   ]}
                 />
               </Flex>
@@ -112,21 +121,21 @@ const CadastroColaboradorTemplate: React.FC = () => {
                   direction={isMobile ? "column" : "row"}
                 >
                   <FormTemplate<IFormData>
-                    customUseForm={formInstance}
+                    customForm={formInstance}
                     fields={[
-                      { type: "cep", name: "endereco.cep", label: "CEP" },
-                      { type: "text", name: "endereco.logradouro", label: "Logradouro" },
-                      { type: "text", name: "endereco.cidade", label: "Cidade" },
-                      { type: "text", name: "endereco.estado", label: "Estado" },
+                      { variant: "input", name: "endereco.cep", label: "CEP", mask: 'cep', rightIcon: isLoadingCep ? <Spinner /> : null },
+                      { variant: "input", name: "endereco.logradouro", label: "Logradouro" },
+                      { variant: "input", name: "endereco.cidade", label: "Cidade" },
+                      { variant: "input", name: "endereco.estado", label: "Estado" },
                     ]}
                   />
                   <div style={{ display: 'flex', alignSelf: isMobile ? 'start' : 'end'}}>
                     <FormTemplate<IFormData>
-                      customUseForm={formInstance}
+                      customForm={formInstance}
                       fields={[
-                        { type: "text", name: "endereco.numero", label: "Número" },
-                        { type: "text", name: "endereco.bairro", label: "Bairro" },
-                        { type: "text", name: "endereco.pais", label: "País" },
+                        { variant: "input", name: "endereco.numero", label: "Número", type: 'number' },
+                        { variant: "input", name: "endereco.bairro", label: "Bairro" },
+                        { variant: "input", name: "endereco.pais", label: "País" },
                       ]}
                     />
                   </div>

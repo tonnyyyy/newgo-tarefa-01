@@ -37,8 +37,8 @@ const CadastroUsuarioTemplate: React.FC = () => {
         hasSubmitButton
         onSubmit={onSubmit}
         fields={[
-          { type: 'text', name: 'username', label: 'Nome de usuário' },
-          { type: 'password', name: 'password', label: 'Senha' }
+          { variant: 'input', name: 'username', label: 'Nome de usuário' },
+          { variant: 'input', name: 'password', label: 'Senha', type: 'password' }
         ]}
       />
     </Container>
