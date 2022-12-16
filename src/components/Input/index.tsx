@@ -1,12 +1,13 @@
 import { ForwardRefRenderFunction, forwardRef, useCallback } from 'react';
-import { FormControl, FormLabel, Input as ChakraInput, InputProps } from "@chakra-ui/react";
+import { FormControl, FormLabel, Input as ChakraInput, InputGroup, InputProps, InputRightElement } from "@chakra-ui/react";
 
 interface IInputProps extends InputProps {
   label: string;
-  mask?: 'cep';
+  mask?: 'cep' | 'cel';
+  rightIcon?: React.ReactNode;
 }
 
-const Input: ForwardRefRenderFunction<HTMLInputElement, IInputProps> = ({ label, mask, ...props }, ref) => {
+const Input: ForwardRefRenderFunction<HTMLInputElement, IInputProps> = ({ label, mask, rightIcon, ...props }, ref) => {
   const masks = {
     cep(e: React.FormEvent<HTMLInputElement>) {
       e.currentTarget.maxLength = 9;
@@ -19,28 +20,39 @@ const Input: ForwardRefRenderFunction<HTMLInputElement, IInputProps> = ({ label,
     },
   }
   const handleKeyUp = useCallback((e: React.FormEvent<HTMLInputElement>) => {
+    const value = e.currentTarget.value;
+    let newValue: string = '';
     switch (mask) {
       case 'cep':
         e.currentTarget.maxLength = 9;
-        const value = e.currentTarget.value;
-        const newValue = value
+        newValue = value
           .replace(/\D/g, '')
-          .replace(/^(\d{5})(\d)/, '$1-$2');
-    
-        e.currentTarget.value = newValue;
+          .replace(/^(\d{5})(\d)/, '$1-$2');    
+        break;
+      case 'cel':
+        e.currentTarget.maxLength = 14;
+        newValue = value
+          .replace(/\D/g, '')
+          .replace(/^(\d{2})(\d{5})(\d)/, '($1)$2-$3');
+        newValue = newValue.slice(0, 14);
+        break;
       default:
-        null;
+        break;
     }
+    e.currentTarget.value = newValue;
   }, []);
 
   return (
     <FormControl>
       <FormLabel>{label}</FormLabel>
-      <ChakraInput
-        ref={ref}
-        onKeyUp={mask && handleKeyUp}
-        {...props}
-      />
+      <InputGroup>
+        <ChakraInput
+          ref={ref}
+          onKeyUp={mask && handleKeyUp}
+          {...props}
+        />
+        <InputRightElement children={rightIcon} />
+      </InputGroup>
     </FormControl>
   );
 }
