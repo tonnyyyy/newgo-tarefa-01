@@ -1,4 +1,4 @@
-import { Box, VStack, InputProps } from '@chakra-ui/react';
+import { Box, VStack, InputProps, Stack } from '@chakra-ui/react';
 import { ComponentType, ReactElement } from 'react';
 import { useForm, Path, UseFormReturn } from 'react-hook-form';
 import Button from '../../Button';
@@ -15,22 +15,23 @@ interface Field<T> extends InputProps {
 }
 
 interface IFormTemplateProps<T extends Nothing> {
-  onSubmit?: (data: T) => void;
   fields: Field<T>[];
   hasSubmitButton?: boolean;
-  customForm?: UseFormReturn<T, any>
+  customForm?: UseFormReturn<T, any>;
+  direction?: 'row' | 'column';
+  onSubmit?: (data: T) => void;
 }
 
 // O '...extends Nothing' é somente para o typescript entender que
 // estou passando um tipo genérico em uma sintaxe de Arrow Funcion. 
 
 /**
- * Renderiza uma coluna de campos conforme a propriedade 'fields'.
+ * Renderiza uma coluna/linha de campos conforme a propriedade 'fields'.
  * 
  * @example
  * <FormTemplate fields={[{ type: 'text', name: 'nomeDoCampo', label: 'Nome exibido' }]} />
  */
-const FormTemplate = <T extends Nothing>({ fields, onSubmit, hasSubmitButton, customForm }: IFormTemplateProps<T>) => {
+const FormTemplate = <T extends Nothing>({ fields, onSubmit, hasSubmitButton, customForm, direction }: IFormTemplateProps<T>) => {
   const { register, handleSubmit } = customForm ? customForm : useForm<T>();
   const renderInput = {
     input: ({ variant, ...field }: Field<T>) => (
@@ -53,9 +54,9 @@ const FormTemplate = <T extends Nothing>({ fields, onSubmit, hasSubmitButton, cu
       onSubmit={onSubmit ? handleSubmit(onSubmit) : undefined}
       flexGrow={1}
     >
-      <VStack spacing={5}>
+      <Stack spacing={5} direction={direction}>
         {fields.map((field) => renderInput[field.variant](field))}
-      </VStack>
+      </Stack>
       {hasSubmitButton && <Button text='Pronto' type='submit' w='75%' alignSelf='center' />}
     </Box>
   );
