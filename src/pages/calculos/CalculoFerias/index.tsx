@@ -1,6 +1,8 @@
+import CalculoFeriasTemplate from "../../../components/templates/calculos/CalculoFeriasTemplate";
+
 const CalculoFerias: React.FC = () => {
   return (
-    <div></div>
+    <CalculoFeriasTemplate />
   );
 }
 
