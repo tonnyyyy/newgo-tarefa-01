@@ -1,24 +1,13 @@
-import { ForwardRefRenderFunction, forwardRef, useCallback } from 'react';
-import { FormControl, FormLabel, Input as ChakraInput, InputGroup, InputProps, InputRightElement } from "@chakra-ui/react";
+import { forwardRef, useCallback, ForwardedRef } from 'react';
+import { FormControl, FormLabel, Input as ChakraInput, InputGroup, InputProps, InputRightElement, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputFieldProps, NumberInputProps, NumberInputStepper } from "@chakra-ui/react";
 
-interface IInputProps extends InputProps {
+type IInputProps<T extends InputProps | NumberInputFieldProps> = T & {
   label: string;
   mask?: 'cep' | 'cel';
   rightIcon?: React.ReactNode;
 }
 
-const Input: ForwardRefRenderFunction<HTMLInputElement, IInputProps> = ({ label, mask, rightIcon, ...props }, ref) => {
-  const masks = {
-    cep(e: React.FormEvent<HTMLInputElement>) {
-      e.currentTarget.maxLength = 9;
-      const value = e.currentTarget.value;
-      const newValue = value
-        .replace(/\D/g, '')
-        .replace(/^(\d{5})(\d)/, '$1-$2');
-
-      e.currentTarget.value = newValue;
-    },
-  }
+function Input<T extends InputProps | NumberInputFieldProps>({ label, mask, rightIcon, max, min, ...props }: IInputProps<T>, ref: ForwardedRef<HTMLInputElement>) {
   const handleKeyUp = useCallback((e: React.FormEvent<HTMLInputElement>) => {
     const value = e.currentTarget.value;
     let newValue: string = '';
@@ -46,12 +35,30 @@ const Input: ForwardRefRenderFunction<HTMLInputElement, IInputProps> = ({ label,
     <FormControl>
       <FormLabel>{label}</FormLabel>
       <InputGroup>
-        <ChakraInput
-          ref={ref}
-          onKeyUp={mask && handleKeyUp}
-          {...props}
-        />
-        <InputRightElement children={rightIcon} />
+        {props.type === 'number' ? (
+          <NumberInput max={Number(max)} min={Number(min)}>
+            <NumberInputField
+              ref={ref}
+              onKeyUp={mask && handleKeyUp}
+              readOnly={(props as InputProps).isReadOnly}
+              w='5rem'
+              {...props as NumberInputFieldProps}
+            />
+            <NumberInputStepper w='2rem'>
+              <NumberIncrementStepper />
+              <NumberDecrementStepper />
+            </NumberInputStepper>
+          </NumberInput>
+          ) : (
+            <>
+              <ChakraInput
+                ref={ref}
+                onKeyUp={mask && handleKeyUp}
+                {...props as InputProps}
+              />
+              <InputRightElement children={rightIcon} />
+            </>
+        )}
       </InputGroup>
     </FormControl>
   );
