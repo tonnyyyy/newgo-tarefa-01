@@ -1,6 +1,8 @@
+import CalculoFolhaPgtoTemplate from "../../../components/templates/calculos/CalculoFolhaPgtoTemplate";
+
 const CalculoFolhaPgto: React.FC = () => {
   return (
-    <div></div>
+    <CalculoFolhaPgtoTemplate />
   );
 }
 
