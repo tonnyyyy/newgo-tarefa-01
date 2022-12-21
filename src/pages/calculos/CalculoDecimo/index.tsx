@@ -1,6 +1,8 @@
+import CalculoDecimoTemplate from "../../../components/templates/calculos/CalculoDecimoTemplate";
+
 const CalculoDecimo: React.FC = () => {
   return (
-    <div></div>
+    <CalculoDecimoTemplate />
   );
 }
 
