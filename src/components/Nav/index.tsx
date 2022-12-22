@@ -8,7 +8,6 @@ const Nav: React.FC = () => {
   return (
     <HStack h='100%' align='center' justify='center' gap={3}>
       <Navlink to='/home' label='home' />
-      <Navlink to='/contatos' label='contatos' />
       <Dropdown
         title='cadastros'
         items={[
