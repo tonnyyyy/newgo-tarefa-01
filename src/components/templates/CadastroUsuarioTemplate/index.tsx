@@ -10,7 +10,7 @@ interface IFormData {
 }
 
 const CadastroUsuarioTemplate: React.FC = () => {
-  const toast = useToast({ duration: 3000, isClosable: true });
+  const toast = useToast({ duration: 10000, isClosable: true });
   const navigate = useNavigate();
 
   const onSubmit = (data: IFormData) => {
@@ -27,7 +27,7 @@ const CadastroUsuarioTemplate: React.FC = () => {
         description: String(err),
         status: 'error'
       })
-    }
+    } 
   }
 
   return (
