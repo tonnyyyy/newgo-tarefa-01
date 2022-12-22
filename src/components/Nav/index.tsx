@@ -3,13 +3,17 @@ import { Box, HStack, Image } from '@chakra-ui/react';
 import Navlink from './components/Navlink';
 import Dropdown from '../Dropdown';
 import Logotipo from '../../assets/logotipo.svg';
+import { useMediaQuery } from '../../hooks/useMediaQuery';
 
 // import { GiHamburgerMenu } from 'react-icons/gi';
 
 const Nav: React.FC = () => {
+  const isMobile = useMediaQuery('mobile');
+
   return (
     <HStack h='100%' align='center' justify='center' gap={3}>
       <Box position='relative' h='100%'>
+      {!isMobile && (
         <Link to='/home'>
           <Image
             src={Logotipo}
@@ -18,6 +22,7 @@ const Nav: React.FC = () => {
             bottom={3}
           />
         </Link>
+      )}
         <Navlink to='/home' label='home' />
       </Box>
       <Dropdown
