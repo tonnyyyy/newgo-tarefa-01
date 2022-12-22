@@ -1,6 +1,6 @@
 :root {
   // DARKMODE
-  --bg-dark: #3c4858;
+  --bg-dark: #2c3d53;
   --font-dark: rgb(230,230,230);
   --primary-dark: #1d262e;
 
@@ -8,7 +8,7 @@
   --font: rgb(15,15,15);
 
 
-  --bg-gradient: linear-gradient(0deg, #31ad3d 0%, var(--bg-dark) 40%);
+  --bg-gradient: linear-gradient(0deg, #0e961b 0%, 5%, var(--bg-dark) 40%);
 }
 
 html {
