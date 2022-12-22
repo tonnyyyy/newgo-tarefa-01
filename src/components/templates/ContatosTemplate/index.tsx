@@ -71,7 +71,7 @@ const ContatosTemplate: React.FC<IContatoTemplateProps> = ({ email, telefone, wh
             content={(
               <HStack spacing={5} justify="center">
                 {redesSociais.map(({ icon, link }) =>(
-                  <a href={link} target="_blank">{icon}</a>
+                  <a key={icon?.toLocaleString() + link} href={link} target="_blank">{icon}</a>
                 ))}
               </HStack>
             )}

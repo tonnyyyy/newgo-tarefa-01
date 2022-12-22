@@ -22,7 +22,7 @@ const Card: React.FC<InfoCardProps> = ({ title, content, footer }) => {
       <CardHeader p={3}>
         <Heading size='md' color='var(--font-dark)'>{title}</Heading>
       </CardHeader>
-      <CardBody p={3} color='var(--font-dark)'><Text textAlign='justify'>{content}</Text></CardBody>
+      <CardBody p={3} color='var(--font-dark)' textAlign='justify'>{content}</CardBody>
       {footer && (
         <CardFooter p={3}>{footer}</CardFooter>
       )}
