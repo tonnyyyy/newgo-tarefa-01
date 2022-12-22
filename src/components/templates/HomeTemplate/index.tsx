@@ -1,4 +1,4 @@
-import { Box, Divider } from "@chakra-ui/react";
+import { Box, Divider, Image } from "@chakra-ui/react";
 import { AiFillLinkedin, AiOutlineFacebook, AiOutlineInstagram } from "react-icons/ai";
 import { useMediaQuery } from "../../../hooks/useMediaQuery";
 import AnimatedLogo from "../../AnimatedLogo";
@@ -39,6 +39,18 @@ const HomeTemplate: React.FC = () => {
             { link: 'https://linkedin.com', icon: <AiFillLinkedin size={30} />}
           ]}
         />
+          <Image
+            src='images/logo-animated-sm.gif'
+            alignSelf='center'
+            w='50px'
+            transition='transform .2s'
+            _hover={{
+              transition: 'transform .2s',
+              transform: 'rotate(45deg)',
+              cursor: 'pointer'
+            }}
+            onClick={() => scroll({ top: 0 })}
+          />
       </Container>
     </Box>
   );

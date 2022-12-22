@@ -1,13 +1,25 @@
 import { Link } from 'react-router-dom';
-import { Flex, HStack, IconButton, Text } from '@chakra-ui/react';
+import { Box, HStack, Image } from '@chakra-ui/react';
 import Navlink from './components/Navlink';
 import Dropdown from '../Dropdown';
+import Logotipo from '../../assets/logotipo.svg';
+
 // import { GiHamburgerMenu } from 'react-icons/gi';
 
 const Nav: React.FC = () => {
   return (
     <HStack h='100%' align='center' justify='center' gap={3}>
-      <Navlink to='/home' label='home' />
+      <Box position='relative' h='100%'>
+        <Link to='/home'>
+          <Image
+            src={Logotipo}
+            position='absolute'
+            left={-20}
+            bottom={3}
+          />
+        </Link>
+        <Navlink to='/home' label='home' />
+      </Box>
       <Dropdown
         title='cadastros'
         items={[
