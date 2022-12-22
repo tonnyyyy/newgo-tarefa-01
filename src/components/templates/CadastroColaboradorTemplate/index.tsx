@@ -1,5 +1,8 @@
-import { Flex, Spinner, useToast } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
+import {
+  Flex, Spinner, useToast,
+  useDisclosure,
+  Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay, ModalCloseButton, ModalFooter, VStack, Text, HStack,
+} from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 
 import viacep from "../../../services/viacep";
@@ -31,9 +34,47 @@ interface IFormData {
 }
 
 const CadastroColaboradorTemplate: React.FC = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const [modalData, setModalData] = useState<IFormData>({} as IFormData);
+  const ResultModal: React.FC = () => {
+    return (
+      <Modal isOpen={isOpen} onClose={onClose} isCentered>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Colaborador criado:</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <VStack align='start'>
+              {Object.entries(modalData).map(([key, value]) => {
+                if (key !== 'endereco') {
+                  return (
+                    <HStack key={key}>
+                      <Text fontWeight='bold'>{key}:</Text>
+                      <Text>{value}</Text>
+                    </HStack>
+                  )
+                }
+                return (
+                  <VStack key={key} align='start'>
+                    {Object.entries(modalData[key]).map(([k, v]) => (
+                      <HStack key={k}>
+                        <Text fontWeight='bold'>{k}:</Text>
+                        <Text>{v}</Text>
+                      </HStack>
+                    ))}
+                  </VStack>
+                )
+              })}
+            </VStack>
+          </ModalBody>
+          <ModalFooter></ModalFooter>
+        </ModalContent>
+      </Modal>
+    )
+  }
+
   const [isLoadingCep, setIsLoadingCep] = useState<boolean>(false);
   const toast = useToast({ duration: 3000, isClosable: true });
-  const navigate = useNavigate();
   const isMobile = useMediaQuery("mobile");
   const formInstance = useForm<IFormData>({
     defaultValues: {
@@ -63,13 +104,14 @@ const CadastroColaboradorTemplate: React.FC = () => {
 
   const onSubmit = (data: IFormData) => {
     try {
+      setModalData(data);
+      onOpen();
       console.log("DADOS DO COLABORADOR:", data);
       toast({
         title: "Colaborador cadastrado.",
         description: ``,
         status: "success",
       });
-      // navigate('/');
     } catch (err) {
       toast({
         title: "Erro ao criar colaborador!",
@@ -81,6 +123,7 @@ const CadastroColaboradorTemplate: React.FC = () => {
 
   return (
     <Container>
+      <ResultModal />
       <Title text="Cadastrando colaborador" />
       <Stepper
         steps={[
