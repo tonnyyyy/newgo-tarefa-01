@@ -17,8 +17,9 @@ const Header: ForwardRefRenderFunction<HTMLDivElement> = (_, ref) => {
       bgColor='var(--bg-dark)'
       ref={ref}
       zIndex={1}
+      backdropFilter='blur(10px)'
     >
-      {isMobile ? <MobileNav /> : <Nav />}
+      {isMobile ? <Nav /> : <Nav />}
     </Box>
   );
 }
