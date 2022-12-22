@@ -19,11 +19,11 @@ const ContatosTemplate: React.FC<IContatoTemplateProps> = ({ email, telefone, wh
 
   return (
     <Container>
-      <Title text='Contatos' />
+      <Title text='Contato' size='lg' />
       <Stack
         spacing={5}
         direction={isMobile ? 'column' : 'row'}
-        align={isMobile ? 'stretch' : 'center'}
+        align='stretch'
         justify='center'
         flexWrap='wrap'
       >
