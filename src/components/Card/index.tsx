@@ -1,4 +1,4 @@
-import { Card as ChakraCard, CardBody, CardHeader, CardFooter, Heading, Text } from '@chakra-ui/react';
+import { Card as ChakraCard, CardBody, CardHeader, CardFooter, Heading, Text, Box } from '@chakra-ui/react';
 
 interface InfoCardProps {
   title?: string | React.ReactNode;
@@ -8,15 +8,26 @@ interface InfoCardProps {
 
 const Card: React.FC<InfoCardProps> = ({ title, content, footer }) => {
   return (
-    <ChakraCard bgColor='var(--primary-dark)' textAlign='center' >
+    <Box
+      borderRadius='10px'
+      bgColor='var(--primary-dark)'
+      textAlign='center' 
+      transition='.2s'
+      _hover={{
+        transition: '.2s',
+        boxShadow: 'inset 0 -5px var(--font-dark)'
+      }}
+    >
+    <ChakraCard>
       <CardHeader p={3}>
         <Heading size='md' color='var(--font-dark)'>{title}</Heading>
       </CardHeader>
-      <CardBody p={3} color='var(--font-dark)'><Text>{content}</Text></CardBody>
+      <CardBody p={3} color='var(--font-dark)'><Text textAlign='justify'>{content}</Text></CardBody>
       {footer && (
         <CardFooter p={3}>{footer}</CardFooter>
       )}
     </ChakraCard>
+    </Box>
   );
 }
 
