@@ -14,7 +14,14 @@ const QuemSomosTemplate: React.FC<IQuemSomosTemplateProps> = ({ resumo, missao, 
   return (
     <Container>
       <Title text='Quem somos?' />
-      <Text textAlign='justify' pb={10}>{resumo}</Text>
+      <Text
+        textAlign='justify'
+        mb={10}
+        p={5}
+        boxShadow='lg'
+        border='1px dashed var(--font-dark)'
+        borderRadius='10px'
+      >{resumo}</Text>
       <Stack spacing={5}>
         <Box
           position='relative'

@@ -23,7 +23,7 @@ const HomeTemplate: React.FC = () => {
       <Container display='flex' flexDir='column' gap='6rem' overflowX={isMobile ? 'hidden' : 'unset'}>
         <Divider />
         <QuemSomosTemplate
-          resumo='Somos uma empresa inovadora, focada em projetar e desenvolver as melhores soluções de software para seus clientes. Trabalhamos com desenvolvimento de sistemas: web, móvel e desktop. Nossos especialistas em Inteligência Artificial, Visão Computacional, Segurança de Sistemas e Teste de Software contribuem para a excelência dos serviços que disponibilizamos neste segmento.'
+          resumo='Somos uma empresa inovadora, focada em projetar e desenvolver as melhores soluções de software para seus clientes. Trabalhamos com desenvolvimento de sistemas: web, móvel e desktop. Nossos especialistas contribuem para a excelência dos serviços que disponibilizamos neste segmento.'
           missao='Oferecer serviços e soluções customizados, de alta qualidade e excelência, concretizando o retorno do investimento de nossos clientes.'
           visao='Ser uma empresa sólida, lucrativa e inovadora, que proporcione qualidade de vida aos colaboradores e promova a transformação da sociedade a partir das novas tecnologias.'
           valores='Nossos valores são os princípios norteados sobre os quais a NewGo foi fundada e como nos esforçamos para conduzir nossos negócios diariamente. Nossos principais valores são: TRANSPARÊNCIA, RESPEITO, DESAFIOS e RESPONSABILIDADE.'
