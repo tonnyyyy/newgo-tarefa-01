@@ -1,4 +1,4 @@
-import { Stack, Text } from "@chakra-ui/react";
+import { Box, Stack, Text } from "@chakra-ui/react";
 import Card from "../../Card";
 import Container from "../../Container";
 import Title from "../../Title";
@@ -16,9 +16,42 @@ const QuemSomosTemplate: React.FC<IQuemSomosTemplateProps> = ({ resumo, missao, 
       <Title text='Quem somos?' />
       <Text textAlign='justify' pb={10}>{resumo}</Text>
       <Stack spacing={5}>
-        <Card title='Missão' content={missao} />
-        <Card title='Visão' content={visao} />
-        <Card title='Valores' content={valores} />
+        <Box
+          position='relative'
+          left={9}
+          transition='transform .8s'
+          _hover={{
+            transition: 'transform .2s',
+            cursor: 'pointer',
+            transform: 'translateX(-20px)',
+          }}
+        >
+          <Card title='missão' content={missao} />
+        </Box>
+        <Box
+          position='relative'
+          left={-9}
+          transition='transform .8s'
+          _hover={{
+            transition: 'transform .2s',
+            cursor: 'pointer',
+            transform: 'translateX(20px)',
+          }}
+        >
+          <Card title='visão' content={visao} />
+        </Box>
+        <Box
+          position='relative'
+          left={9}
+          transition='transform .8s'
+          _hover={{
+            transition: 'transform .2s',
+            cursor: 'pointer',
+            transform: 'translateX(-20px)',
+          }}
+        >
+          <Card title='valores' content={valores} />
+        </Box>
       </Stack>
     </Container>
   );
