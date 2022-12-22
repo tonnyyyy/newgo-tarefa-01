@@ -1,4 +1,4 @@
-import { Heading, HStack, Stack, Text, VStack } from "@chakra-ui/react";
+import { Box, Heading, HStack, Stack, Text, VStack } from "@chakra-ui/react";
 import Card from "../../Card";
 
 import { useMediaQuery } from "../../../hooks/useMediaQuery";
@@ -24,22 +24,59 @@ const ContatosTemplate: React.FC<IContatoTemplateProps> = ({ email, telefone, wh
         spacing={5}
         direction={isMobile ? 'column' : 'row'}
         align='stretch'
-        justify='center'
+        justify='stretch'
         flexWrap='wrap'
+        flexGrow={1}
       >
-        <Card title={<HStack justify='center'><BsFillTelephoneForwardFill /><Text>Telefone</Text></HStack>} content={telefone} />
-        <Card title={<HStack justify='center'><BsWhatsapp /><Text>Whatsapp</Text></HStack>} content={whatsapp} />
-        <Card title={<HStack justify='center'><AiFillMail /><Text>E-mail</Text></HStack>} content={email} />
-        <Card
-          title="Redes sociais"
-          content={(
-            <HStack spacing={5} justify="center">
-              {redesSociais.map(({ icon, link }) =>(
-                <a href={link} target="_blank">{icon}</a>
-              ))}
-            </HStack>
-          )}
-        />
+        <Box
+          display={isMobile ? 'unset' : 'flex'}
+          transition='transform .2s'
+          _hover={{
+            transition: 'transform.2s',
+            transform: 'translateY(-10px)'
+          }}
+        >
+          <Card title={<HStack justify='center'><BsFillTelephoneForwardFill /><Text>Telefone</Text></HStack>} content={telefone} />
+        </Box>
+        <Box
+          display={isMobile ? 'unset' : 'flex'}
+          transition='transform .2s'
+          _hover={{
+            transition: 'transform.2s',
+            transform: 'translateY(-10px)'
+          }}
+        >
+          <Card title={<HStack justify='center'><BsWhatsapp /><Text>Whatsapp</Text></HStack>} content={whatsapp} />
+        </Box>
+        <Box
+          display={isMobile ? 'unset' : 'flex'}
+          transition='transform .2s'
+          _hover={{
+            transition: 'transform.2s',
+            transform: 'translateY(-10px)'
+          }}
+        >
+          <Card title={<HStack justify='center'><AiFillMail /><Text>E-mail</Text></HStack>} content={email} />
+        </Box>
+        <Box
+          display={isMobile ? 'unset' : 'flex'}
+          transition='transform .2s'
+          _hover={{
+            transition: 'transform.2s',
+            transform: 'translateY(-10px)'
+          }}
+        >
+          <Card
+            title="Redes sociais"
+            content={(
+              <HStack spacing={5} justify="center">
+                {redesSociais.map(({ icon, link }) =>(
+                  <a href={link} target="_blank">{icon}</a>
+                ))}
+              </HStack>
+            )}
+          />
+        </Box>
       </Stack>
     </Container>
   );
