@@ -1,4 +1,4 @@
-import { forwardRef, useCallback, ForwardedRef } from 'react';
+import { forwardRef, useCallback, ForwardedRef, useRef } from 'react';
 import { FormControl, FormLabel, Input as ChakraInput, InputGroup, InputProps, InputRightElement, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputFieldProps, NumberInputProps, NumberInputStepper } from "@chakra-ui/react";
 
 type IInputProps<T extends InputProps | NumberInputFieldProps> = T & {
@@ -7,7 +7,7 @@ type IInputProps<T extends InputProps | NumberInputFieldProps> = T & {
   rightIcon?: React.ReactNode;
 }
 
-function Input<T extends InputProps | NumberInputFieldProps>({ label, mask, rightIcon, max, min, ...props }: IInputProps<T>, ref: ForwardedRef<HTMLInputElement>) {
+function Input<T extends InputProps | NumberInputFieldProps>({ label, mask, rightIcon, max, min, ...props }: IInputProps<T>, ref: ForwardedRef<HTMLInputElement>) {  
   const handleKeyUp = useCallback((e: React.FormEvent<HTMLInputElement>) => {
     const value = e.currentTarget.value;
     let newValue: string = '';
@@ -35,30 +35,12 @@ function Input<T extends InputProps | NumberInputFieldProps>({ label, mask, righ
     <FormControl>
       <FormLabel>{label}</FormLabel>
       <InputGroup>
-        {props.type === 'number' ? (
-          <NumberInput max={Number(max)} min={Number(min)}>
-            <NumberInputField
-              ref={ref}
-              onKeyUp={mask && handleKeyUp}
-              readOnly={(props as InputProps).isReadOnly}
-              w='5rem'
-              {...props as NumberInputFieldProps}
-            />
-            <NumberInputStepper w='2rem'>
-              <NumberIncrementStepper />
-              <NumberDecrementStepper />
-            </NumberInputStepper>
-          </NumberInput>
-          ) : (
-            <>
-              <ChakraInput
-                ref={ref}
-                onKeyUp={mask && handleKeyUp}
-                {...props as InputProps}
-              />
-              <InputRightElement children={rightIcon} />
-            </>
-        )}
+        <ChakraInput
+          ref={ref}
+          onKeyUp={mask && handleKeyUp}
+          {...props as InputProps}
+        />
+        <InputRightElement children={rightIcon} />
       </InputGroup>
     </FormControl>
   );
