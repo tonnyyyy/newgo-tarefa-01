@@ -1,8 +1,8 @@
 import { Box, VStack, InputProps, Stack } from '@chakra-ui/react';
-import { ComponentType, ReactElement } from 'react';
 import { useForm, Path, UseFormReturn } from 'react-hook-form';
 import Button from '../../Button';
 import Input from '../../Input';
+import Title from '../../Title';
 
 interface Nothing {}
 
@@ -19,6 +19,7 @@ interface IFormTemplateProps<T extends Nothing> {
   hasSubmitButton?: boolean;
   customForm?: UseFormReturn<T, any>;
   direction?: 'row' | 'column';
+  title?: string;
   onSubmit?: (data: T) => void;
 }
 
@@ -31,7 +32,7 @@ interface IFormTemplateProps<T extends Nothing> {
  * @example
  * <FormTemplate fields={[{ type: 'text', name: 'nomeDoCampo', label: 'Nome exibido' }]} />
  */
-const FormTemplate = <T extends Nothing>({ fields, onSubmit, hasSubmitButton, customForm, direction }: IFormTemplateProps<T>) => {
+const FormTemplate = <T extends Nothing>({ fields, onSubmit, hasSubmitButton, customForm, direction, title }: IFormTemplateProps<T>) => {
   const { register, handleSubmit } = customForm ? customForm : useForm<T>();
   const renderInput = {
     input: ({ variant, ...field }: Field<T>) => (
@@ -50,10 +51,11 @@ const FormTemplate = <T extends Nothing>({ fields, onSubmit, hasSubmitButton, cu
       as='form'
       display='flex'
       flexDir='column'
-      gap={10}
+      gap={5}
       onSubmit={onSubmit ? handleSubmit(onSubmit) : undefined}
       flexGrow={1}
     >
+      {title && <Title text={title} size='md' pb={0} />}
       <Stack spacing={5} direction={direction}>
         {fields.map((field) => renderInput[field.variant](field))}
       </Stack>
