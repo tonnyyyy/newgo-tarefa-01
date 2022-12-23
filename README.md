@@ -12,10 +12,10 @@ Aplicação front-end para um sistema de rotinas de RH.
 - Submenu Cadastro Usuario
 - Submenu Cadastro Colaborador
 ### Telas para CADASTRO tanto de Usuarios quanto de Colaboradores
-Campos para USUÁRIOS:
+#### Campos para USUÁRIOS:
 - Nome Usuario,
 - Senha Usuario,
-Campos para COLABORADORES:
+#### Campos para COLABORADORES:
 - Nome Colaborador,
 - Cargo na empresa,
 - Setor de atuação,
