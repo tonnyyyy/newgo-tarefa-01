@@ -6,7 +6,7 @@ Aplicação front-end para um sistema de rotinas de RH.
 
 ### No menu CONTATOS deve conter:
 - telefone, Email da empresa, Whatsapp, e redes sociais.
-### No menu Quem somos deve conter:
+### No menu QUEM SOMOS deve conter:
 - Uma breve história de como a empresa começou, MISSÃO, VISÃO E VALORES
 ### No menu CADASTROS deve conter:
 - Submenu Cadastro Usuario
